@@ -16,7 +16,7 @@ int main() {
   for(int i = 0; i < numTimes; i ++){
     int one = rand() % 10;
     int two = rand() % 10;
-    printf("What is %d", one, " + %d", two, "? ");
+    printf("What is %d + %d? ", one, two);
     scanf("%d", &result);
     if(result == (one + two)){
       numWon ++;
