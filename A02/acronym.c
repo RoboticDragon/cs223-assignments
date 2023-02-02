@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+/***************************************************
+ * acronym.c
+ * Author: Hilary Lutz
+ * Implements an acronym maker
+ */
 int main() {
   char word[1025];
   printf("Enter a phrase: ");

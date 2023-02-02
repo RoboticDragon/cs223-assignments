@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+/***************************************************
+ * songs.c
+ * Author: Hilary Lutz
+ * Implements a song holder/folder thing
+ */
 struct Song{
   char title[32];
   char author[32];
@@ -42,13 +47,17 @@ int main() {
     printf("Which attribute do you wish to edit? [artist, title, duration, danceability]: ");
     char attr[14];
     scanf("%s", attr);
-    if(attr[0] == 'a'){
+    if(strcmp(attr, "artist") == 0){
+      char art[32];
       printf("Enter artist here: ");
-      scanf(" %[^\n]%*c", songs[songID].author);
-    } else if(attr[0] == 't'){
+      scanf(" %[^\n]%*c", art);
+      strcpy(songs[songID].author, art);
+    } else if(strcmp(attr, "title") == 0){
+      char titl[32];
       printf("Enter title here: ");
-      scanf(" %[^\n]%*c", songs[songID].title);
-    } else if(attr[1] == 'u'){
+      scanf(" %[^\n]%*c", titl);
+      strcpy(songs[songID].title, titl);
+    } else if(strcmp(attr, "duration") == 0){
       printf("Enter duration (minutes) here: ");
       scanf(" %d%*c", &songs[songID].durMin);
       printf("Enter duration (seconds) here: ");

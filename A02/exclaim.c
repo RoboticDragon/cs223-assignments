@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+/***************************************************
+ * exclaim.c
+ * Author: Hilary Lutz
+ * Implements a symbol word swap thing
+ */
 int main() {
   char word[32];
   printf("Enter a word: ");
