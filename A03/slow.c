@@ -17,7 +17,8 @@ int main() {
   printf("Text: ");
   scanf("%[^\n]%*c", word1);
   long len = strlen(word1);
-  word2 = malloc(sizeof(char) * (pause + 1) * strlen(word1));
+  word2 = malloc(sizeof(char) * (pause + 1) * strlen(word1) + 1);
+  word2[sizeof(char) * (pause + 1) * strlen(word1)] = '\0';
   printf("sizeof word1: %lu\n", len);
   printf("sizeof word2: %lu\n", sizeof(word2));
   printf("sizeof pause: %lu\n", sizeof(pause));
@@ -29,7 +30,7 @@ int main() {
       word2[i] = '.';
     }
   }
-  word2[strlen(word2)] = '\0';
+  
   printf("%s \n", word2);
   free(word2);
   return 0;
