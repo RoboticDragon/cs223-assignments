@@ -34,17 +34,9 @@ if (infile == NULL) {
    }
   }
   
-   //char buffer[1024];
+  
 
  
- //printf("got here 1\n");
- 
-   int j = 0;
-
-    
-     // printf("Got here 2 \n");
-    
-     // printf("Got here 3 \n");
    
 
     // tokenize the line
@@ -54,57 +46,11 @@ if (infile == NULL) {
       printf("Error allocating memory\n");
       return NULL;
     }
-    //printf("Got here 4 \n");
-    //struct ppm_pixel* listOfPixs;
+   
     fread(listOfPixs, sizeof(struct ppm_pixel), (*h * *w), infile);
-    //printf("Got here 5 \n");
-   // printf("%c",listOfPixs[0].red);
-   // //printf("Got here 6 \n"); 
-     
-   //  while (listOfPixs) {
-      //printf("%c\n", listOfPixs[0].blue);
-      //printf("Got here 7 \n");
-      //struct ppm_pixel pixel;
-      //printf("Got here 8 \n");
+  
       
-      int i = 0;
-      while(i < 3){
-       
-         if(i == 0){
-            //pixel.red = listOfPixs[i].red;
-            // printf("%d\n", pixel.red);
-            // printf("Got here 9 \n");
-         } else if (i == 1){
-            //pixel.green = listOfPixs[i].green;
-            // printf("%d\n", pixel.green);
-            // printf("Got here 10 \n");
-         } else {
-            //pixel.blue = listOfPixs[i].blue;
-            // printf("%d\n", pixel.blue);
-            // printf("Got here 11 \n");
-            
-         }
       
-        //listOfPixs = strtok(NULL, ",");
-        i++;
-        //printf("red: %c, green: %c, blue: %c\n", pixel.red, pixel.green, pixel.blue);
-      }
-      //printf("Got here 12 \n");
-  
-      //listOfPixs = strtok(NULL, ",");
-      //printf("Red: %d, Green: %d, Blue: %d\n", pixel.red, pixel.green, pixel.blue);
-    
-      //printf("Got here 13 \n");
-      j++;
-  
-
-  
-
-
-    
-
-    //}
-    
     
     fclose(infile);
     
