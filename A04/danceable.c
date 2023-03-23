@@ -31,20 +31,35 @@ struct node* insert_front(struct Song val, struct node* head) {
   n->next = head;
   return n;
 }
+struct node* find_previous(struct Song x, struct node* list) { 
+ 
+/*1*/ struct node* p = list; 
+/*2*/ while( (p->next != NULL) && (p->next->song.artist == x.artist) ){
+      p = p->next; 
+} 
+/*3*/ 
+/*4*/ return p; 
+} 
+void delete(struct node* node){
+   struct node* prev = find_previous(node->song, node);
+   prev->next = node->next;
+   free(node);
+}
 
 void print(struct node* list) {
    if(!list){
       printf("List empty!\n");
       return;
    }
-  for (struct node* n = list; n->next != NULL; n = n->next) {
-    printf("Song: %s\n", n->song.title);
-  }
+  printf("%s     %s   (%d:%d) D: %f E: %f T: %f V: %f\n", list->song.title, list->song.artist, (list->song.dur / 600),(list->song.dur % 600), 
+  list->song.dance, list->song.energy, list->song.tempo, list->song.valence);
 }
 
-void printSongs(struct Song *s, int len){
-   for(int i = 0; i < len; i ++){
-      printf("%d) %s\n\t artist: %s\n\t duration (in milliseconds): %d\n\t danceability: %f\n\t energy: %f\n\t tempo: %f\n\t valence: %f\n", i + 1, s[i].title, s[i].artist, s[i].dur, s[i].dance, s[i].energy, s[i].tempo, s[i].valence);
+void printSongs(struct node* s){
+   while(s != NULL){
+      printf("%s     %s    (%d:%ds) D: %f E: %f T: %f V: %f\n", s->song.title, s->song.artist, (s->song.dur / 600),(s->song.dur % 600), 
+  s->song.dance, s->song.energy, s->song.tempo, s->song.valence);
+  s = s->next;
    }
 }
 
@@ -75,7 +90,7 @@ if (infile == NULL) {
   char header[1024]; 
   fgets(header, 1024, infile);
 int times = 0;
-  struct node* songNode;
+  //struct node* songNode;
     struct node* list;
 
     struct Song song1;
@@ -131,15 +146,13 @@ int times = 0;
       listOfWords = strtok(NULL, ",");
       
       if(j == 0){
-      printf("%s\n", song1.artist);
-        list = insert_front(song1, songNode);
+      
+        list = insert_front(song1, NULL);
         
       } else {
          
-         struct node* songNode2 = insert_front(song1, list);
-         printf("%s\n", songNode2->next->song.artist);
-         songNode = songNode2;
-         printf("%s\n", songNode2->song.artist);
+         list = insert_front(song1, list);
+         
          
       }
       j++;
@@ -152,16 +165,53 @@ int times = 0;
 
   
   
-  //free(listOfWords);
-  //free(songNode);
+  
       
       
     }
+   free(listOfWords);
+  }
+  
+  //free(songNode);
+//   free(buffer);
+//   free(header);
+  int len = 5;
+  printSongs(list);
+  printf("Dataset contains %d songs\n", len);
+  char cont;
+  printf("Press 'd' to show the most danceable song (any other key to quit): ");
+   scanf(" %c", &cont);
+   printf("\n");
+  while(cont == 'd' && len > 0){
+   
+   struct node* most = list;
+   struct node* n = list;
+   while(n != NULL){
+      if(n->song.dance > most->song.dance){
+         most = n;
+         
+      }
+      n = n->next;
+   }
+   free(n);
+      print(most);
+      printf("-----------------------\n");
+      delete(most);
+      len -= 1;
+      printSongs(list);
+      printf("Dataset contains %d songs\n", len);
+      
+      printf("-------------------------------------------------------\n");
+      printf("Press 'd' to show the most danceable song (any other key to quit): ");
+      scanf(" %c",&cont);
+   
 
   }
-  fprintf(outfile, "This is output! %d", 100);
+  //printf(outfile, "This is output! %d", 100);
   fclose(outfile);
   fclose(infile);
-  print(list);
+  //print(list);
+  clearList(list);
+  
   return 0;
 }

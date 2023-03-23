@@ -1,6 +1,6 @@
 /***************************************************
  * mathgame.c
- * Author: 
+ * Author: Hilary Lutz
  * Implements a math game
  */
 
