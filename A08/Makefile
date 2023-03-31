@@ -1,6 +1,6 @@
 CC=gcc
 % :: %.c
-	$(CC) -g -Wall -Wvla -Werror $< -o $@ -lm
+	$(CC) -g -Wall -Wvla -Werror $< -o $@ -lm -lpthread
 
 all: single_mandelbrot multi_mandelbrot warmup search
 

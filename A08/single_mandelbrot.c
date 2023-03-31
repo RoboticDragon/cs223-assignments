@@ -7,7 +7,11 @@
 #include "write_ppm.h"
 
 int main(int argc, char* argv[]) {
-  int size = 480;
+  struct timeval stop, start;
+  double timer = time(0);
+  gettimeofday(&start, NULL);
+  
+  int size = 100;
   float xmin = -2.0;
   float xmax = 0.47;
   float ymin = -1.12;
@@ -32,9 +36,12 @@ int main(int argc, char* argv[]) {
   struct ppm_pixel* palette  = malloc(sizeof(struct ppm_pixel) * maxIterations);
   struct ppm_pixel* pixels  = malloc(sizeof(struct ppm_pixel) * size * size);
   for(int x = 0; x <  maxIterations; x++){
-    palette[x].red = rand() % 255;
-    palette[x].green = rand() % 255;
-    palette[x].blue = rand() % 255;
+    int basered = rand() % 255;
+    int basegreen = rand() % 255;
+    int baseblue = rand() % 255;
+    palette[x].red = basered + rand() % 100 - 50;
+    palette[x].green = basegreen + rand() % 100 - 50;
+    palette[x].blue = baseblue + rand() % 100 - 50;
   }
   for(int i = 0; i < size; i++){
     for(int j = 0; j < size; j++){
@@ -65,8 +72,13 @@ int main(int argc, char* argv[]) {
     }
   }
   srand(time(0));
-  write_ppm("mandelbrot-480-1649001071.ppm", pixels,size, size);
+  gettimeofday(&stop, NULL);
+  
+  timer = stop.tv_sec - start.tv_sec + (stop.tv_usec - start.tv_usec)/1.e6;
+  printf("time is %f\n",timer);
+  write_ppm("mandelbrot-100-1649001071.ppm", pixels,size, size);
   // compute image
+  
   free(pixels);
   free(palette);
   return 0;

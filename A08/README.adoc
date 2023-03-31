@@ -1,9 +1,17 @@
 = Hardware specifications
 
 Where did your run your tests? A laptop, or goldengate?
+    Goldengate (well, technically comet).
 
 What are the performance specifications of the machine: number and speed of
 processors, size of RAM? (use `lscpu` and `free -m`)
+    8 cpus, 2 threads per core, 4 cores per socket. 
+    CPU MHz:                         3800.000
+    CPU max MHz:                     4200.0000
+    CPU min MHz:                     800.0000
+    total        used        free      shared  buff/cache   available
+Mem:          32035        2433       15299          21       14303       29136
+Swap:          8191           0        8191
 
 = Single-process mandelbrot
 
@@ -13,11 +21,11 @@ the amount of time it takes to compute each image.
 [cols="1,1"]
 !===
 | Size | Time (s) 
-| 100 | todo
-| 400 | todo
-| 800 | todo
-| 1000 | todo
-| 2000 | todo
+| 100 | 0.047620
+| 400 | 0.253638
+| 800 | 1.034372
+| 1000 | 1.567748
+| 2000 | 6.266608
 !===
 
 = Multi-process mandelbrot
@@ -28,9 +36,9 @@ the amount of time it takes to compute each image.
 [cols="1,1"]
 !===
 | Size | Time (s) 
-| 100 | todo
-| 400 | todo
-| 800 | todo
-| 1000 | todo
-| 2000 | todo
+| 100 | 0.023032
+| 400 | 0.275358
+| 800 | 1.083348
+| 1000 | 1.690416
+| 2000 | 6.750030
 !===
