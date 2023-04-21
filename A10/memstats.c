@@ -17,6 +17,51 @@ struct chunk {
 };
 
 void memstats(struct chunk* freelist, void* buffer[], int len) {
+  int numChunks = 0;
+  int usedChunks = 0;
+  int totalMem = 0;
+  int usedMem = 0;
+  int totalUsedMem = 0;
+  float memPercent = (float)0;
+  struct chunk* i = freelist;
+
+  while(i != NULL){
+    numChunks ++;
+    totalMem += i->size;
+
+    i = i->next;
+  }
+  for(int j = 0; j < len; j++){
+
+    
+    
+    
+
+    if(buffer[j] != NULL){
+      numChunks++;
+      
+      struct chunk* u = ((struct chunk*)buffer[j]) - 1;
+      totalMem += u->size;
+      totalUsedMem += u->used;
+      //printf("%d",u->size);
+      if(u->used > 0){
+
+        usedChunks++;
+        usedMem += u->size;
+
+    }
+    }
+      
+    
+    
+
+  }
+
+  //printf("Total blocks: %d, Used blocks: %d, Total memory: %d, Used memory: %d\n", numChunks, usedChunks, totalMem, usedMem);
+  memPercent =  1- ((float)totalUsedMem / (float)usedMem);
+  printf("Total blocks: %d Free blocks: %d Used blocks: %d\n", numChunks, (numChunks - usedChunks), usedChunks);
+  printf("Total memory allocated: %d Free memory: %d Used memory: %d\n", totalMem, (totalMem - usedMem), usedMem);
+  printf("Underutilized memory: %f\n", memPercent);
 }
 
 int main ( int argc, char* argv[]) {
@@ -51,8 +96,9 @@ int main ( int argc, char* argv[]) {
       else {
         size_t size = (size_t) randExp(8, 4000); 
         int *memory = NULL;
+        
         memory = malloc(size);
-
+        //printf("%ld", size);
         if (memory == NULL) {
           fprintf(stderr, "malloc failed\n");
           return(1);

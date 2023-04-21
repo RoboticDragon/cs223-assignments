@@ -35,8 +35,10 @@ int main (int argc, char* argv[]) {
   check(flist == 0, "test 2: flist is NULL to start");
 
   void *request1 = malloc(sizeof(char)*32);
+  
   current = sbrk(0);
   check(flist == 0, "test 3: flist is empty after first malloc");
+  printf("%ld, %ld, %ld\n", sizeof(char)*32, (long)current, (long)init);
   check((current-init) == 32+16, "test 4: correct amount allocated");
 
   struct chunk* header1 = (struct chunk*) ((struct chunk*) request1 - 1);
